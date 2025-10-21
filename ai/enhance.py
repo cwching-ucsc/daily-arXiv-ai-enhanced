@@ -190,10 +190,11 @@ def main():
     print('Open:', args.data, file=sys.stderr)
 
     # ✅ Filter by keywords (title + abstract)
+    print(keyword_list)
     if keyword_list:
         filtered_data = []
         for item in data:
-            text = (item.get("title", "") + " " + item.get("abstract", "")).lower()
+            text = (item.get("title", "") + " " + item.get("summary", "")).lower()
             if any(kw in text for kw in keyword_list):
                 filtered_data.append(item)
 
