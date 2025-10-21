@@ -161,6 +161,10 @@ def main():
     args = parse_args()
     model_name = os.environ.get("MODEL_NAME", 'deepseek-chat')
     language = os.environ.get("LANGUAGE", 'Chinese')
+    keywords = os.environ.get("KEYWORDS", '')
+
+    # Turn comma-separated string into a clean list
+    keyword_list = [kw.strip().lower() for kw in keywords.split(",") if kw.strip()]
 
     # 检查并删除目标文件
     target_file = args.data.replace('.jsonl', f'_AI_enhanced_{language}.jsonl')
@@ -184,6 +188,19 @@ def main():
 
     data = unique_data
     print('Open:', args.data, file=sys.stderr)
+
+    # ✅ Filter by keywords (title + abstract)
+    if keyword_list:
+        filtered_data = []
+        for item in data:
+            text = (item.get("title", "") + " " + item.get("abstract", "")).lower()
+            if any(kw in text for kw in keyword_list):
+                filtered_data.append(item)
+
+        print(f"Filtered {len(data)} → {len(filtered_data)} papers matching keywords", file=sys.stderr)
+        data = filtered_data
+    else:
+        print("No keywords specified, processing all papers.", file=sys.stderr)
     
     # 并行处理所有数据
     processed_data = process_all_items(
