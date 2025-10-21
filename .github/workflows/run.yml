@@ -111,7 +111,7 @@ jobs:
         export MODEL_NAME="${{ vars.MODEL_NAME }}"
 
         # Split keywords variable into arguments
-        KEYWORDS="${{ vars.KEYWORDS }}"
+        export KEYWORDS="${{ vars.KEYWORDS }}"
         echo "Using keywords: ${KEYWORDS}"
         
         python enhance.py --data ../data/${today}.jsonl
