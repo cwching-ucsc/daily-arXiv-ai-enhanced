@@ -5,8 +5,8 @@ name: arXiv-daily-ai-enhanced
 
 on:
   schedule:
-    # Run at 2:00 UTC (7:00 PM PDT) on Sunday–Tuesday
-    - cron: "0 2 * * 0-4"
+    # Run at 3:00 UTC (8:00 PM PDT) on Sunday–Tuesday
+    - cron: "0 3 * * 0-4"
   workflow_dispatch:
 
 
