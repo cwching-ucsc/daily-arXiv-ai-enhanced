@@ -116,8 +116,8 @@ def process_all_items(data: List[Dict], model_name: str, language: str, max_work
     """并行处理所有数据项"""
     llm = ChatOpenAI(
         model=model_name,
-        api_key=os.environ.get("OPENAI_API_KEY"),
-        base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+        # api_key=os.environ.get("OPENAI_API_KEY"),
+        # base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
     ).with_structured_output(Structure, method="function_calling")
     print('Connect to:', model_name, file=sys.stderr)
     
